@@ -609,7 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dad4978ed51a8c4395bdcfcd3967d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSystem: {fileID: 0}
+  inputSystem: {fileID: 1904285706971184254, guid: a5926ed5e6b3e1541a089fa7109de006,
+    type: 3}
   liftRigidbody: {fileID: 0}
   forkliftRigidbody: {fileID: 0}
 --- !u!54 &7493171911223401526

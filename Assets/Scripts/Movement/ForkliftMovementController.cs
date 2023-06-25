@@ -1,23 +1,25 @@
 using ForkliftDemo.InputSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ForkliftDemo.Movement
 {
     public class ForkliftMovementController : MonoBehaviour
     {
+        [FormerlySerializedAs("inputSystem")]
         [SerializeField]
-        private PlayerInputSystem inputSystem;
+        private PlayerInputSystem playerInputSystem;
 
         private void Awake()
         {
-            inputSystem.OnLiftPerformed += OnLiftPerformed;
-            inputSystem.OnDrivePerformed += OnDrivePerformed;
+            playerInputSystem.OnLiftPerformed += OnLiftPerformed;
+            playerInputSystem.OnDrivePerformed += OnDrivePerformed;
         }
 
         private void OnDestroy()
         {
-            inputSystem.OnLiftPerformed -= OnLiftPerformed;
-            inputSystem.OnDrivePerformed -= OnDrivePerformed;
+            playerInputSystem.OnLiftPerformed -= OnLiftPerformed;
+            playerInputSystem.OnDrivePerformed -= OnDrivePerformed;
         }
 
         private void OnLiftPerformed(float value)

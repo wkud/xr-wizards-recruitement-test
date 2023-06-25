@@ -882,7 +882,7 @@ PrefabInstance:
     - target: {fileID: 2692044049348346501, guid: a5926ed5e6b3e1541a089fa7109de006,
         type: 3}
       propertyPath: m_Name
-      value: InputManager
+      value: PlayerInputSystem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5926ed5e6b3e1541a089fa7109de006, type: 3}
