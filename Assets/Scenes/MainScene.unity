@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 731801658567534323, guid: a4db35aee5557ea4795ccca09a1bedc6,
         type: 3}
       propertyPath: m_Name
-      value: Palett
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 731801658567534323, guid: a4db35aee5557ea4795ccca09a1bedc6,
         type: 3}
