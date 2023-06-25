@@ -1,0 +1,16 @@
+{
+    "name": "ForkliftDemo.Movement",
+    "rootNamespace": "ForkliftDemo.Movement",
+    "references": [
+        "GUID:680d6b3f7c47ba042a05f992f1764040"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
