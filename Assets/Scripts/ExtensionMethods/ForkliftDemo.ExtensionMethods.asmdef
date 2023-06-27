@@ -1,10 +1,7 @@
 {
-    "name": "ForkliftDemo.Movement",
-    "rootNamespace": "ForkliftDemo.Movement",
-    "references": [
-        "GUID:680d6b3f7c47ba042a05f992f1764040",
-        "GUID:e0d6ac25de47cfc4e8cf13d8eace2a1d"
-    ],
+    "name": "ForkliftDemo.ExtensionMethods",
+    "rootNamespace": "ForkliftDemo.ExtensionMethods",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
