@@ -18,14 +18,21 @@ namespace ForkliftDemo.Movement
         private Rigidbody forkliftRigidbody;
 
         [SerializeField]
+        private Transform forkliftForceAnchor;
+
+        [SerializeField]
         [Range(0, Mathf.PI / 2)]
         private float maxSteeringAngle = Mathf.PI / 2;
 
         [SerializeField]
         private float steeringSpeed = 0.05f;
 
-        private float steeringAngle = 0;
+        [SerializeField]
+        private float drivingForceValue = 0.2f;
+
+        private float steeringAngle;
         private Vector3 steeringForwardDirection = Vector3.forward;
+        private Vector3 drivingForce;
 
         private void Start()
         {
@@ -46,7 +53,18 @@ namespace ForkliftDemo.Movement
 
         private void OnDrivingUpdated(Vector2 inputValue)
         {
-            var steeringInput = inputValue.x;
+            HandleSteering(inputValue.x);
+            HandleDriving(inputValue.y);
+        }
+
+        private void HandleDriving(float drivingInput)
+        {
+            drivingForce = drivingInput * steeringForwardDirection.normalized * drivingForceValue * Time.fixedDeltaTime;
+            forkliftRigidbody.AddForceAtPosition(drivingForce, forkliftForceAnchor.position);
+        }
+
+        private void HandleSteering(float steeringInput)
+        {
             steeringAngle += steeringInput * steeringSpeed * Time.fixedDeltaTime;
             steeringAngle = Mathf.Clamp(steeringAngle, -maxSteeringAngle, maxSteeringAngle);
 
@@ -66,8 +84,10 @@ namespace ForkliftDemo.Movement
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.magenta;
+            Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, transform.position + steeringForwardDirection * 20);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(transform.position, transform.position + drivingForce);
         }
     }
 }
