@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 896215240}
   - component: {fileID: 896215239}
   - component: {fileID: 896215238}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 1920339881}
   - component: {fileID: 1920339880}
   - component: {fileID: 1920339879}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 1998085444}
   - component: {fileID: 1998085443}
   - component: {fileID: 1998085442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1207,11 +1207,6 @@ PrefabInstance:
         type: 3}
       propertyPath: steeringSpeed
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: maxSteeringAngle
-      value: 1.57
       objectReference: {fileID: 0}
     - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}

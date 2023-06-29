@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7807828477178117641}
   - component: {fileID: 1190802420746921908}
   - component: {fileID: 5101688489610594881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1188734164517487785}
   - component: {fileID: 8782350490153066251}
   - component: {fileID: 5927381023073491167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_R_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6190709441505229750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ForceAnchor
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 2307399576091121065}
   - component: {fileID: 8943422862354486100}
   - component: {fileID: 4022054381898691926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_L_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 678952873293847009}
   - component: {fileID: 274994411928917426}
   - component: {fileID: 2936680881988979461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_R_Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 4719094903327212595}
   - component: {fileID: 5628064978992626838}
   - component: {fileID: 3494636077989053019}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheel_L_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 6251244278816610462}
   - component: {fileID: 3648241846726959539}
   - component: {fileID: 6085388809180985458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8323354036534750779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 8805163024465428429}
   - component: {fileID: 7493171911223401526}
   - component: {fileID: 6300204352467670195}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Forklift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +661,17 @@ MonoBehaviour:
   forkliftForceAnchor: {fileID: 6190709441505229750}
   maxSteeringAngle: 1.57
   steeringSpeed: 0.05
-  drivingSpeed: 1000
+  drivingForceValue: 0.2
+  leftBackWheelPivot: {fileID: 4719094903327212595}
+  leftFrontWheelPivot: {fileID: 2307399576091121065}
+  rightBackWheelPivot: {fileID: 1188734164517487785}
+  rightFrontWheelPivot: {fileID: 678952873293847009}
+  DriveableLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  suspensionDesiredHeight: 1
+  springStrength: 100
+  springDamping: 20
 --- !u!54 &7493171911223401526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -689,8 +699,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.304634, y: 8.271837, z: 8.171626}
-  m_Center: {x: 0.014817238, y: 4.0804415, z: -0.20744371}
+  m_Size: {x: 5.0999403, y: 7.3748426, z: 8.171626}
+  m_Center: {x: 0.014817238, y: 4.214212, z: -0.20744371}
 --- !u!1 &8323354037369969140
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8323354037369969147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,7 +747,7 @@ GameObject:
   - component: {fileID: 8361151617491601352}
   - component: {fileID: 4874896515980200045}
   - component: {fileID: 7224877455987375271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
