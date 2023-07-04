@@ -670,8 +670,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   suspensionDesiredHeight: 1
-  springStrength: 100
-  springDamping: 20
+  suspensionSpringStrength: 100
+  suspensionSpringDamping: 20
+  wheelFrictionFactor: 0.5
+  wheelMass: 0.1
 --- !u!54 &7493171911223401526
 Rigidbody:
   m_ObjectHideFlags: 0

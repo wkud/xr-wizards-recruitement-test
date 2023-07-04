@@ -41,6 +41,12 @@ namespace ForkliftDemo.Movement
         [SerializeField]
         private float suspensionSpringDamping = 20f;
 
+        [SerializeField]
+        [Range(0, 1)]
+        private float wheelFrictionFactor = 0.5f;
+        [SerializeField]
+        private float wheelMass = 1;
+
         private float steeringAngle;
         private Vector3 steeringForwardDirection = Vector3.forward;
         private Vector3 drivingForce;
@@ -59,7 +65,7 @@ namespace ForkliftDemo.Movement
 
         private void FixedUpdate()
         {
-            HandleSuspension();
+            HandleVehiclePhysics();
         }
 
         private void OnDestroy()
@@ -79,7 +85,7 @@ namespace ForkliftDemo.Movement
             HandleDriving(inputValue.y);
         }
 
-        private void HandleSuspension()
+        private void HandleVehiclePhysics()
         {
             foreach (var wheelPivot in wheelPivots)
             {
@@ -87,13 +93,30 @@ namespace ForkliftDemo.Movement
                 if (didRaycastHit)
                 {
                     var wheelWorldVelocity = forkliftRigidbody.GetPointVelocity(wheelPivot.position);
-                    var offset = suspensionDesiredHeight - hitInfo.distance;
-                    var upwardsVelocity = Vector3.Dot(transform.up, wheelWorldVelocity); // project wheel world velocity onto Y axis relative to transform of the forklift
-
-                    var suspensionForceValue = offset * suspensionSpringStrength - upwardsVelocity * suspensionSpringDamping;
-                    forkliftRigidbody.AddForceAtPosition(transform.up * suspensionForceValue, wheelPivot.position);
+                    HandleSuspensionPhysics(wheelPivot, hitInfo.distance, wheelWorldVelocity);
+                    HandleSteeringPhysics(wheelPivot, wheelWorldVelocity);
                 }
             }
+        }
+
+        private void HandleSuspensionPhysics(Transform wheelPivot, float currentSuspensionHeight, Vector3 wheelWorldVelocity)
+        {
+            var offset = suspensionDesiredHeight - currentSuspensionHeight;
+            var upwardsVelocity = Vector3.Dot(transform.up, wheelWorldVelocity); // project wheel world velocity onto Y axis relative to transform of the forklift
+
+            var suspensionForceValue = offset * suspensionSpringStrength - upwardsVelocity * suspensionSpringDamping;
+            forkliftRigidbody.AddForceAtPosition(transform.up * suspensionForceValue, wheelPivot.position);
+        }
+
+
+        private void HandleSteeringPhysics(Transform wheelPivot, Vector3 wheelWorldVelocity)
+        {
+            var steeringDirection = transform.right;
+
+            var steeringVelocity = Vector3.Dot(steeringDirection, wheelWorldVelocity);
+            float desiredVelocityChange = -steeringVelocity * wheelFrictionFactor;
+            float desiredAcceleration = desiredVelocityChange / Time.fixedDeltaTime;
+            forkliftRigidbody.AddForceAtPosition(steeringDirection * wheelMass * desiredAcceleration, wheelPivot.position);
         }
 
         private void HandleDriving(float drivingInput)
