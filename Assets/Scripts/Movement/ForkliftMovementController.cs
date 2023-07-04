@@ -47,6 +47,11 @@ namespace ForkliftDemo.Movement
         [SerializeField]
         private float wheelMass = 1;
 
+        [SerializeField]
+        private float maxDrivingSpeed = 20;
+        [SerializeField]
+        private float maxAcceleration = 1;
+
         private float steeringAngle;
         private Vector3 steeringForwardDirection = Vector3.forward;
         private Vector3 drivingForce;
@@ -95,6 +100,7 @@ namespace ForkliftDemo.Movement
                     var wheelWorldVelocity = forkliftRigidbody.GetPointVelocity(wheelPivot.position);
                     HandleSuspensionPhysics(wheelPivot, hitInfo.distance, wheelWorldVelocity);
                     HandleSteeringPhysics(wheelPivot, wheelWorldVelocity);
+                    HandleAccelerationPhysics(wheelPivot, 1); // TODO change '1' to actual input value
                 }
             }
         }
@@ -117,6 +123,43 @@ namespace ForkliftDemo.Movement
             float desiredVelocityChange = -steeringVelocity * wheelFrictionFactor;
             float desiredAcceleration = desiredVelocityChange / Time.fixedDeltaTime;
             forkliftRigidbody.AddForceAtPosition(steeringDirection * wheelMass * desiredAcceleration, wheelPivot.position);
+        }
+
+        private void HandleAccelerationPhysics(Transform wheelPivot, float drivingInput)
+        {
+            var accelerationDirection = transform.forward;
+
+            if (drivingInput > 0)
+            {
+                var speedInDrivingDirection = Vector3.Dot(transform.forward, forkliftRigidbody.velocity);
+                Debug.Log(speedInDrivingDirection);
+
+                var normalizedSpeed = Mathf.Clamp01(Mathf.Abs(speedInDrivingDirection) / maxDrivingSpeed);
+                var availableTorque = GetAccelerationByDrivingSpeed(normalizedSpeed) * drivingInput;
+                forkliftRigidbody.AddForceAtPosition(accelerationDirection * availableTorque, wheelPivot.position);
+            }
+        }
+
+        private float GetAccelerationByDrivingSpeed(float normalizedSpeed)
+        {
+            if (normalizedSpeed <= 0.2f)
+            {
+                return maxAcceleration;
+            }
+            if (normalizedSpeed <= 0.5f)
+            {
+                return Mathf.Lerp(maxAcceleration, maxAcceleration / 2f, normalizedSpeed.Map(0.2f, 0.5f));
+            }
+            if (normalizedSpeed <= 0.7f)
+            {
+                return maxAcceleration / 2f;
+            }
+            if (normalizedSpeed < 1)
+            {
+                return Mathf.Lerp(maxAcceleration / 2f, 0, normalizedSpeed.Map(0.7f, 1));
+            }
+
+            return 0; // when normalizedSpeed >= 1
         }
 
         private void HandleDriving(float drivingInput)

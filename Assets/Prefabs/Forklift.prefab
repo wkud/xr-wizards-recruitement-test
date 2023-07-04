@@ -674,6 +674,8 @@ MonoBehaviour:
   suspensionSpringDamping: 20
   wheelFrictionFactor: 0.5
   wheelMass: 0.1
+  maxDrivingSpeed: 30
+  maxAcceleration: 3
 --- !u!54 &7493171911223401526
 Rigidbody:
   m_ObjectHideFlags: 0

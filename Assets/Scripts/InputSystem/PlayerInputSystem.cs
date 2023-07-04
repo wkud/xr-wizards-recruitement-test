@@ -39,15 +39,15 @@ namespace ForkliftDemo.InputSystem
 
         private void FixedUpdate()
         {
-            if (isLifting)
-            {
-                OnLiftingUpdated?.Invoke(lastLiftingInputValue);
-            }
+            //if (isLifting)
+            //{
+            //    OnLiftingUpdated?.Invoke(lastLiftingInputValue);
+            //}
 
-            if (isDriving)
-            {
-                OnDrivingUpdated?.Invoke(lastDrivingInputValue);
-            }
+            //if (isDriving)
+            //{
+            //    OnDrivingUpdated?.Invoke(lastDrivingInputValue);
+            //}
         }
 
         private void StartLifting(InputAction.CallbackContext callbackContext)
