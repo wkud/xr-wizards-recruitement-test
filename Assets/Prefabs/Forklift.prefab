@@ -676,7 +676,7 @@ MonoBehaviour:
   wheelMass: 0.1
   maxDrivingSpeed: 30
   maxAcceleration: 3
-  wheelPivotsWithDrive:
+  driveWheelPivots:
   - {fileID: 2307399576091121065}
   - {fileID: 678952873293847009}
 --- !u!54 &6775202657484348496
