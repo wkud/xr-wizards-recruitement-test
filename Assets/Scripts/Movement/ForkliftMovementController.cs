@@ -100,7 +100,7 @@ namespace ForkliftDemo.Movement
                     var wheelWorldVelocity = forkliftRigidbody.GetPointVelocity(wheelPivot.position);
                     HandleSuspensionPhysics(wheelPivot, hitInfo.distance, wheelWorldVelocity);
                     HandleSteeringPhysics(wheelPivot, wheelWorldVelocity);
-                    HandleAccelerationPhysics(wheelPivot, 1); // TODO change '1' to actual input value
+                    HandleAccelerationPhysics(wheelPivot, -1); // TODO change '1' to actual input value
                 }
             }
         }
@@ -134,29 +134,24 @@ namespace ForkliftDemo.Movement
                 var speedInDrivingDirection = Vector3.Dot(transform.forward, forkliftRigidbody.velocity);
                 Debug.Log(speedInDrivingDirection);
 
-                var normalizedSpeed = Mathf.Clamp01(Mathf.Abs(speedInDrivingDirection) / maxDrivingSpeed);
+                var normalizedSpeed = Mathf.Abs(Mathf.Clamp01(speedInDrivingDirection / maxDrivingSpeed));
                 var availableTorque = GetAccelerationByDrivingSpeed(normalizedSpeed) * drivingInput;
                 forkliftRigidbody.AddForceAtPosition(accelerationDirection * availableTorque, wheelPivot.position);
             }
+            // TODO add braking
+            // TODO apply anti slipping (same method as in SteeringPhysics)
         }
 
-        private float GetAccelerationByDrivingSpeed(float normalizedSpeed)
+        private float GetAccelerationByDrivingSpeed(float normalizedDrivingSpeed)
         {
-            if (normalizedSpeed <= 0.2f)
+            var lowSpeedThreshold = 0.3f;
+            if (normalizedDrivingSpeed <= lowSpeedThreshold)
             {
                 return maxAcceleration;
             }
-            if (normalizedSpeed <= 0.5f)
+            if (normalizedDrivingSpeed < 1)
             {
-                return Mathf.Lerp(maxAcceleration, maxAcceleration / 2f, normalizedSpeed.Map(0.2f, 0.5f));
-            }
-            if (normalizedSpeed <= 0.7f)
-            {
-                return maxAcceleration / 2f;
-            }
-            if (normalizedSpeed < 1)
-            {
-                return Mathf.Lerp(maxAcceleration / 2f, 0, normalizedSpeed.Map(0.7f, 1));
+                return Mathf.Lerp(maxAcceleration, 0, normalizedDrivingSpeed.Map(lowSpeedThreshold, 1));
             }
 
             return 0; // when normalizedSpeed >= 1

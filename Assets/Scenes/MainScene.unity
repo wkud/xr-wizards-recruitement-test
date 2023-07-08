@@ -193,6 +193,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 731801658567534323, guid: a4db35aee5557ea4795ccca09a1bedc6,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 731801658567534323, guid: a4db35aee5557ea4795ccca09a1bedc6,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -1207,6 +1212,16 @@ PrefabInstance:
         type: 3}
       propertyPath: steeringSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: maxAcceleration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: maxDrivingSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
