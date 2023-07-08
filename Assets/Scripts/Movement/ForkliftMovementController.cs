@@ -53,35 +53,13 @@ namespace ForkliftDemo.Movement
         private Vector3 steeringForwardDirection = Vector3.forward;
         private Vector3 drivingForce;
 
-        private void Start()
-        {
-            playerInputSystem.OnLiftingUpdated += OnLiftingUpdated;
-            playerInputSystem.OnDrivingUpdated += OnDrivingUpdated;
-        }
-
         private void FixedUpdate()
         {
-            HandleVehiclePhysics();
+            var driveInput = playerInputSystem.DrivingInputValue;
+            HandleVehiclePhysics(driveInput.x);
         }
 
-        private void OnDestroy()
-        {
-            playerInputSystem.OnLiftingUpdated -= OnLiftingUpdated;
-            playerInputSystem.OnDrivingUpdated -= OnDrivingUpdated;
-        }
-
-        private void OnLiftingUpdated(float inputValue)
-        {
-
-        }
-
-        private void OnDrivingUpdated(Vector2 inputValue)
-        {
-            HandleSteering(inputValue.x);
-            HandleDriving(inputValue.y);
-        }
-
-        private void HandleVehiclePhysics()
+        private void HandleVehiclePhysics(float accelerationInput)
         {
             foreach (var wheelPivot in wheelPivots)
             {
@@ -94,7 +72,7 @@ namespace ForkliftDemo.Movement
 
                     if (driveWheelPivots.Contains(wheelPivot))
                     {
-                        HandleAccelerationPhysics(wheelPivot, 1); // TODO change '1' to actual input value
+                        HandleAccelerationPhysics(wheelPivot, accelerationInput);
                     }
                 }
             }
