@@ -617,8 +617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8323354036767388677}
   - component: {fileID: 8805163024465428429}
-  - component: {fileID: 7493171911223401526}
-  - component: {fileID: 6300204352467670195}
+  - component: {fileID: 6775202657484348496}
   m_Layer: 6
   m_Name: Forklift
   m_TagString: Untagged
@@ -657,15 +656,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInputSystem: {fileID: 0}
   liftRigidbody: {fileID: 3648241846726959539}
-  forkliftRigidbody: {fileID: 7493171911223401526}
+  forkliftRigidbody: {fileID: 6775202657484348496}
   forkliftForceAnchor: {fileID: 6190709441505229750}
   maxSteeringAngle: 1.57
   steeringSpeed: 0.05
   drivingForceValue: 0.2
-  leftBackWheelPivot: {fileID: 4719094903327212595}
-  leftFrontWheelPivot: {fileID: 2307399576091121065}
-  rightBackWheelPivot: {fileID: 1188734164517487785}
-  rightFrontWheelPivot: {fileID: 678952873293847009}
+  wheelPivots:
+  - {fileID: 4719094903327212595}
+  - {fileID: 2307399576091121065}
+  - {fileID: 1188734164517487785}
+  - {fileID: 678952873293847009}
   DriveableLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -676,7 +676,10 @@ MonoBehaviour:
   wheelMass: 0.1
   maxDrivingSpeed: 30
   maxAcceleration: 3
---- !u!54 &7493171911223401526
+  wheelPivotsWithDrive:
+  - {fileID: 2307399576091121065}
+  - {fileID: 678952873293847009}
+--- !u!54 &6775202657484348496
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -692,19 +695,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6300204352467670195
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8323354036767388678}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.0999403, y: 6.6885643, z: 8.3337}
-  m_Center: {x: 0.014817238, y: 4.557351, z: -0.12640691}
 --- !u!1 &8323354037369969140
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +741,7 @@ GameObject:
   - component: {fileID: 8361151617491601352}
   - component: {fileID: 4874896515980200045}
   - component: {fileID: 7224877455987375271}
+  - component: {fileID: 1551977157135849435}
   m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
@@ -826,3 +817,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1551977157135849435
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9170199329518214514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7656348851005705370, guid: d14042fb86936a94197f2e8cda269c65, type: 3}

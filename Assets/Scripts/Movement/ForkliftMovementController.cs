@@ -2,6 +2,7 @@ using ForkliftDemo.InputSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 using ForkliftDemo.ExtensionMethods;
+using System.Linq;
 
 namespace ForkliftDemo.Movement
 {
@@ -25,13 +26,7 @@ namespace ForkliftDemo.Movement
         private float drivingForceValue = 0.2f;
 
         [SerializeField]
-        private Transform leftBackWheelPivot;
-        [SerializeField]
-        private Transform leftFrontWheelPivot;
-        [SerializeField]
-        private Transform rightBackWheelPivot;
-        [SerializeField]
-        private Transform rightFrontWheelPivot;
+        private Transform[] wheelPivots;
         [SerializeField]
         private LayerMask DriveableLayerMask;
         [SerializeField]
@@ -51,16 +46,12 @@ namespace ForkliftDemo.Movement
         private float maxDrivingSpeed = 20;
         [SerializeField]
         private float maxAcceleration = 1;
+        [SerializeField]
+        private Transform[] driveWheelPivots;
 
         private float steeringAngle;
         private Vector3 steeringForwardDirection = Vector3.forward;
         private Vector3 drivingForce;
-        private Transform[] wheelPivots;
-
-        private void Awake()
-        {
-            wheelPivots = new Transform[] { leftBackWheelPivot, leftFrontWheelPivot, rightBackWheelPivot, rightFrontWheelPivot };
-        }
 
         private void Start()
         {
@@ -100,7 +91,11 @@ namespace ForkliftDemo.Movement
                     var wheelWorldVelocity = forkliftRigidbody.GetPointVelocity(wheelPivot.position);
                     HandleSuspensionPhysics(wheelPivot, hitInfo.distance, wheelWorldVelocity);
                     HandleSteeringPhysics(wheelPivot, wheelWorldVelocity);
-                    HandleAccelerationPhysics(wheelPivot, -1); // TODO change '1' to actual input value
+
+                    if (driveWheelPivots.Contains(wheelPivot))
+                    {
+                        HandleAccelerationPhysics(wheelPivot, 1); // TODO change '1' to actual input value
+                    }
                 }
             }
         }
