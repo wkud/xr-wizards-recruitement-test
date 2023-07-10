@@ -16,18 +16,10 @@ namespace ForkliftDemo.Movement.VehicleAxisControllers
 
         public Vector3 CalculateAccelerationForce(Vector3 vehicleLocalAxisZ, Vector3 vehicleRigidbodyVelicity, float accelerationInput)
         {
-            if (accelerationInput > 0)
-            {
-                var speedInDrivingDirection = Vector3.Dot(vehicleLocalAxisZ, vehicleRigidbodyVelicity);
-                Debug.Log(speedInDrivingDirection);
-                float normalizedSpeed = NormalizeSpeed(speedInDrivingDirection);
-                var availableTorque = GetAccelerationByDrivingSpeed(normalizedSpeed) * accelerationInput;
-                return vehicleLocalAxisZ * availableTorque;
-            }
-            // TODO add braking
-            // TODO apply anti slipping (same method as in SteeringPhysics)
-
-            return Vector3.zero;
+            var speedInDrivingDirection = Vector3.Dot(vehicleLocalAxisZ, vehicleRigidbodyVelicity);
+            float normalizedSpeed = NormalizeSpeed(speedInDrivingDirection);
+            var availableTorque = GetAccelerationByDrivingSpeed(normalizedSpeed) * accelerationInput;
+            return vehicleLocalAxisZ * availableTorque;
         }
 
         private float NormalizeSpeed(float speedInDrivingDirection)

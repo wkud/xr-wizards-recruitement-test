@@ -34,7 +34,7 @@ namespace ForkliftDemo.Movement
         [SerializeField]
         private SuspensionAxisController suspensionController;
         [SerializeField]
-        private SteeringAxisController steeringController;
+        private TractionController tractionController;
         [SerializeField]
         private AccelerationAxisController accelerationController;
 
@@ -45,7 +45,7 @@ namespace ForkliftDemo.Movement
         private void FixedUpdate()
         {
             var driveInput = playerInputSystem.DrivingInputValue;
-            HandleVehiclePhysics(driveInput.x);
+            HandleVehiclePhysics(driveInput.y);
         }
 
         private void HandleVehiclePhysics(float accelerationInput)
@@ -61,15 +61,25 @@ namespace ForkliftDemo.Movement
                 Vector3 resultantForce = default;
                 var wheelWorldVelocity = forkliftRigidbody.GetPointVelocity(wheelPivot.position);
 
-                resultantForce += suspensionController.CalculateSuspensionForce(hitInfo.distance, transform.up, wheelWorldVelocity);
-                resultantForce += steeringController.CalculateSteeringForce(transform.right, wheelWorldVelocity);
+                var suspensionForce = suspensionController.CalculateSuspensionForce(hitInfo.distance, transform.up, wheelWorldVelocity);
+                resultantForce += suspensionForce;
+                var tractionInSteeringAxis = tractionController.CalculateTractionForce(wheelPivot.right, wheelWorldVelocity);
+                resultantForce += tractionInSteeringAxis;
 
-                if (driveWheelPivots.Contains(wheelPivot))
+                if (driveWheelPivots.Contains(wheelPivot) && accelerationInput > 0)
                 {
                     resultantForce += accelerationController.CalculateAccelerationForce(transform.forward, forkliftRigidbody.velocity, accelerationInput);
                 }
 
+                if (accelerationInput == 0)
+                {
+                    var tractionForceInAccelerationAxis = tractionController.CalculateTractionForce(transform.forward, wheelWorldVelocity);
+                    resultantForce += tractionForceInAccelerationAxis;
+                }
+
+                // TODO add if (accelerationInput < 0) => reverse acceleration
                 forkliftRigidbody.AddForceAtPosition(resultantForce, wheelPivot.position);
+                Debug.Log("Force: " + resultantForce + "; Acceleration: " + accelerationInput+"; Velocity: "+forkliftRigidbody.velocity);
             }
         }
 

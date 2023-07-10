@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ForkliftDemo.Movement.VehicleAxisControllers
 {
     [Serializable]
-    class SteeringAxisController
+    class TractionController
     {
         [SerializeField]
         [Range(0, 1)]
@@ -12,12 +12,12 @@ namespace ForkliftDemo.Movement.VehicleAxisControllers
         [SerializeField]
         private float wheelMass = 0.1f;
 
-        public Vector3 CalculateSteeringForce(Vector3 vehicleLocalAxisX, Vector3 wheelWorldVelocity)
+        public Vector3 CalculateTractionForce(Vector3 vehicleLocalTractionAxis, Vector3 wheelWorldVelocity)
         {
-            var steeringVelocity = Vector3.Dot(vehicleLocalAxisX, wheelWorldVelocity);
+            var steeringVelocity = Vector3.Dot(vehicleLocalTractionAxis, wheelWorldVelocity);
             float desiredVelocityChange = -steeringVelocity * wheelFrictionFactor;
             float desiredAcceleration = desiredVelocityChange / Time.fixedDeltaTime;
-            return vehicleLocalAxisX * wheelMass * desiredAcceleration;
+            return vehicleLocalTractionAxis * wheelMass * desiredAcceleration;
         }
     }
 }
