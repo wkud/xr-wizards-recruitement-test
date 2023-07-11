@@ -658,6 +658,7 @@ MonoBehaviour:
   liftRigidbody: {fileID: 3648241846726959539}
   forkliftRigidbody: {fileID: 6775202657484348496}
   forkliftForceAnchor: {fileID: 6190709441505229750}
+  maxSteeringAngle: 1.5707964
   wheelPivots:
   - {fileID: 4719094903327212595}
   - {fileID: 2307399576091121065}
@@ -666,19 +667,23 @@ MonoBehaviour:
   driveWheelPivots:
   - {fileID: 2307399576091121065}
   - {fileID: 678952873293847009}
+  steeringWheelPivots:
+  - {fileID: 2307399576091121065}
+  - {fileID: 678952873293847009}
   DriveableLayerMask:
     serializedVersion: 2
     m_Bits: 128
   suspensionController:
     <SuspensionDesiredHeight>k__BackingField: 1
     suspensionSpringStrength: 100
-    suspensionSpringDamping: 20
+    suspensionSpringDamping: 10
   tractionController:
     wheelFrictionFactor: 0.5
     wheelMass: 0.1
   accelerationController:
     maxDrivingSpeed: 30
-    maxAcceleration: 3
+    maxAcceleration: 2
+    maxReversingSpeed: 10
 --- !u!54 &6775202657484348496
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ namespace ForkliftDemo.Movement.VehicleAxisControllers
         [SerializeField]
         private float suspensionSpringStrength = 100f;
         [SerializeField]
-        private float suspensionSpringDamping = 20f;
+        private float suspensionSpringDamping = 10f;
 
         public Vector3 CalculateSuspensionForce(float currentSuspensionHeight, Vector3 vehicleLocalAxisY, Vector3 wheelWorldVelocity)
         {

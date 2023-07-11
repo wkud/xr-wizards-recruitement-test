@@ -1228,21 +1228,6 @@ PrefabInstance:
       propertyPath: playerInputSystem
       value: 
       objectReference: {fileID: 1840526869}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: accelerationController.maxAcceleration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: accelerationController.maxDrivingSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: suspensionController.suspensionSpringDamping
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 9170199329518214514, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
       propertyPath: m_StaticEditorFlags

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Linq;
 using ForkliftDemo.Movement.VehicleAxisControllers;
+using ForkliftDemo.ExtensionMethods;
 
 namespace ForkliftDemo.Movement
 {
@@ -17,9 +18,9 @@ namespace ForkliftDemo.Movement
         private Rigidbody forkliftRigidbody;
         [SerializeField]
         private Transform forkliftForceAnchor;
-        //[SerializeField]
-        //[Range(0, Mathf.PI / 2)]
-        //private float maxSteeringAngle = Mathf.PI / 2;
+        [SerializeField]
+        [Range(0, Mathf.PI / 2)]
+        private float maxSteeringAngle = Mathf.PI / 2;
         //[SerializeField]
         //private float steeringSpeed = 0.05f;
         //[SerializeField]
@@ -29,6 +30,8 @@ namespace ForkliftDemo.Movement
         private Transform[] wheelPivots;
         [SerializeField]
         private Transform[] driveWheelPivots;
+        [SerializeField]
+        private Transform[] steeringWheelPivots;
         [SerializeField]
         private LayerMask DriveableLayerMask;
         [SerializeField]
@@ -46,6 +49,7 @@ namespace ForkliftDemo.Movement
         {
             var driveInput = playerInputSystem.DrivingInputValue;
             HandleVehiclePhysics(driveInput.y);
+            HandleSteering(driveInput.x);
         }
 
         private void HandleVehiclePhysics(float accelerationInput)
@@ -79,7 +83,7 @@ namespace ForkliftDemo.Movement
 
                 // TODO add if (accelerationInput < 0) => reverse acceleration
                 forkliftRigidbody.AddForceAtPosition(resultantForce, wheelPivot.position);
-                Debug.Log("Force: " + resultantForce + "; Acceleration: " + accelerationInput+"; Velocity: "+forkliftRigidbody.velocity);
+                //Debug.Log("Force: " + resultantForce + "; Acceleration: " + accelerationInput+"; Velocity: "+forkliftRigidbody.velocity);
             }
         }
 
@@ -89,24 +93,29 @@ namespace ForkliftDemo.Movement
         //    forkliftRigidbody.AddForceAtPosition(drivingForce, forkliftForceAnchor.position);
         //}
 
-        //private void HandleSteering(float steeringInput)
-        //{
-        //    steeringAngle += steeringInput * steeringSpeed * Time.fixedDeltaTime;
-        //    steeringAngle = Mathf.Clamp(steeringAngle, -maxSteeringAngle, maxSteeringAngle);
+        private void HandleSteering(float steeringInput)
+        {
+            //var steeringAngle = steeringInput.Map(-maxSteeringAngle, maxSteeringAngle);
 
-        //    var slerpRatio = steeringAngle.Map(0, 1, -maxSteeringAngle, maxSteeringAngle);
-        //    slerpRatio = Mathf.Clamp01(slerpRatio);
+            //var slerpRatio = steeringInput.Map(0, 1, -maxSteeringAngle, maxSteeringAngle);
+            //slerpRatio = Mathf.Clamp01(slerpRatio);
+            var slerpRatio = steeringInput;
 
-        //    var normalVectorToPlaneOfRotation = transform.up;
-        //    var baseForwardDirection = transform.forward;
+            var normalVectorToPlaneOfRotation = transform.up;
+            //var baseForwardDirection = transform.forward;
 
-        //    var quartenion = Quaternion.Slerp(
-        //        Quaternion.LookRotation(transform.right * -1, normalVectorToPlaneOfRotation),
-        //        Quaternion.LookRotation(transform.right, normalVectorToPlaneOfRotation),
-        //        slerpRatio);
+            var steeringWheelRotation = Quaternion.Slerp(
+                Quaternion.LookRotation(transform.right * -1, normalVectorToPlaneOfRotation),
+                Quaternion.LookRotation(transform.right, normalVectorToPlaneOfRotation),
+                slerpRatio);
 
-        //    steeringForwardDirection = quartenion * baseForwardDirection;
-        //}
+            foreach (var steeringWheelPivot in steeringWheelPivots)
+            {
+                steeringWheelPivot.rotation = steeringWheelRotation;
+            }
+            Debug.Log("SteeringInput: " + steeringInput);
+            //steeringForwardDirection = quartenion * baseForwardDirection;
+        }
 
         //private void OnDrawGizmos()
         //{

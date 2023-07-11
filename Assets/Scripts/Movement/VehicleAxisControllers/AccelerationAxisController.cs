@@ -10,7 +10,7 @@ namespace ForkliftDemo.Movement.VehicleAxisControllers
         [SerializeField]
         private float maxDrivingSpeed = 30;
         [SerializeField]
-        private float maxAcceleration = 3;
+        private float maxAcceleration = 2;
         [SerializeField]
         private float maxReversingSpeed = 10;
 
