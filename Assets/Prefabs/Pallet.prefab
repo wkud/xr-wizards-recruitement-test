@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1284918907187588235}
   - component: {fileID: 2117215108166920328}
   - component: {fileID: 8224890292867119629}
+  - component: {fileID: 5351071553957672529}
   m_Layer: 0
   m_Name: Pallet
   m_TagString: Untagged
@@ -125,3 +126,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75114226, y: 0.70879114, z: 6.55069}
   m_Center: {x: 3.2823396, y: 0.35439354, z: 0}
+--- !u!54 &5351071553957672529
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731801658567534323}
+  serializedVersion: 2
+  m_Mass: 0.2
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

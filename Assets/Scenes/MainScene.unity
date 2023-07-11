@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 731801658567534323, guid: a4db35aee5557ea4795ccca09a1bedc6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 731801658567534323, guid: a4db35aee5557ea4795ccca09a1bedc6,
         type: 3}
@@ -1151,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 8323354036767388677, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8323354036767388677, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
@@ -1203,6 +1203,16 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8657150657159394101, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: liftingSmoothness
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657150657159394101, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: playerInputSystem
+      value: 
+      objectReference: {fileID: 1840526869}
     - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
       propertyPath: debugTran
@@ -1223,6 +1233,21 @@ PrefabInstance:
       propertyPath: playerInputSystem
       value: 
       objectReference: {fileID: 1840526869}
+    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: accelerationController.maxAcceleration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: accelerationController.maxDrivingSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
+        type: 3}
+      propertyPath: accelerationController.maxReversingSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9170199329518214514, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
       propertyPath: m_StaticEditorFlags

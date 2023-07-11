@@ -12,6 +12,7 @@ namespace ForkliftDemo.Movement
         [FormerlySerializedAs("inputSystem")]
         [SerializeField]
         private PlayerInputSystem playerInputSystem;
+
         [SerializeField]
         private Rigidbody forkliftRigidbody;
         [SerializeField]
