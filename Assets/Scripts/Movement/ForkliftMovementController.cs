@@ -19,12 +19,11 @@ namespace ForkliftDemo.Movement
         [SerializeField]
         private Transform forkliftForceAnchor;
         [SerializeField]
-        [Range(0, Mathf.PI / 2)]
-        private float maxSteeringAngle = Mathf.PI / 2;
-        //[SerializeField]
-        //private float steeringSpeed = 0.05f;
-        //[SerializeField]
-        //private float drivingForceValue = 0.2f;
+        [Range(0, MathExtension.HALF_PI)]
+        private float maxSteeringAngle = MathExtension.HALF_PI;
+        [SerializeField]
+        [Range(0, 1)]
+        private float steeringSpeed = 0.3f;
 
         [SerializeField]
         private Transform[] wheelPivots;
@@ -32,8 +31,9 @@ namespace ForkliftDemo.Movement
         private Transform[] driveWheelPivots;
         [SerializeField]
         private Transform[] steeringWheelPivots;
+        [FormerlySerializedAs("DriveableLayerMask")]
         [SerializeField]
-        private LayerMask DriveableLayerMask;
+        private LayerMask DriveableFloorLayerMask;
         [SerializeField]
         private SuspensionAxisController suspensionController;
         [SerializeField]
@@ -41,9 +41,7 @@ namespace ForkliftDemo.Movement
         [SerializeField]
         private AccelerationAxisController accelerationController;
 
-        //private float steeringAngle;
-        //private Vector3 steeringForwardDirection = Vector3.forward;
-        //private Vector3 drivingForce;
+        private float steeringAngle;
 
         private void FixedUpdate()
         {
@@ -56,7 +54,7 @@ namespace ForkliftDemo.Movement
         {
             foreach (var wheelPivot in wheelPivots)
             {
-                var didRaycastHit = Physics.Raycast(wheelPivot.position, transform.up * -1, out var hitInfo, suspensionController.SuspensionDesiredHeight, DriveableLayerMask);
+                var didRaycastHit = Physics.Raycast(wheelPivot.position, transform.up * -1, out var hitInfo, suspensionController.SuspensionDesiredHeight, DriveableFloorLayerMask);
                 if (!didRaycastHit)
                 {
                     continue;
@@ -70,7 +68,7 @@ namespace ForkliftDemo.Movement
                 var tractionInSteeringAxis = tractionController.CalculateTractionForce(wheelPivot.right, wheelWorldVelocity);
                 resultantForce += tractionInSteeringAxis;
 
-                if (driveWheelPivots.Contains(wheelPivot) && accelerationInput > 0)
+                if (driveWheelPivots.Contains(wheelPivot) && accelerationInput != 0)
                 {
                     resultantForce += accelerationController.CalculateAccelerationForce(transform.forward, forkliftRigidbody.velocity, accelerationInput);
                 }
@@ -81,49 +79,20 @@ namespace ForkliftDemo.Movement
                     resultantForce += tractionForceInAccelerationAxis;
                 }
 
-                // TODO add if (accelerationInput < 0) => reverse acceleration
                 forkliftRigidbody.AddForceAtPosition(resultantForce, wheelPivot.position);
-                //Debug.Log("Force: " + resultantForce + "; Acceleration: " + accelerationInput+"; Velocity: "+forkliftRigidbody.velocity);
             }
         }
-
-        //private void HandleDriving(float drivingInput)
-        //{
-        //    drivingForce = drivingInput * steeringForwardDirection.normalized * drivingForceValue * Time.fixedDeltaTime;
-        //    forkliftRigidbody.AddForceAtPosition(drivingForce, forkliftForceAnchor.position);
-        //}
 
         private void HandleSteering(float steeringInput)
         {
-            //var steeringAngle = steeringInput.Map(-maxSteeringAngle, maxSteeringAngle);
-
-            //var slerpRatio = steeringInput.Map(0, 1, -maxSteeringAngle, maxSteeringAngle);
-            //slerpRatio = Mathf.Clamp01(slerpRatio);
-            var slerpRatio = steeringInput;
-
-            var normalVectorToPlaneOfRotation = transform.up;
-            //var baseForwardDirection = transform.forward;
-
-            var steeringWheelRotation = Quaternion.Slerp(
-                Quaternion.LookRotation(transform.right * -1, normalVectorToPlaneOfRotation),
-                Quaternion.LookRotation(transform.right, normalVectorToPlaneOfRotation),
-                slerpRatio);
+            var desiredSteeringAngle = steeringInput * maxSteeringAngle;
+            steeringAngle = Mathf.Lerp(steeringAngle, desiredSteeringAngle, steeringSpeed);
+            steeringAngle = Mathf.Clamp(steeringAngle, -maxSteeringAngle, maxSteeringAngle);
 
             foreach (var steeringWheelPivot in steeringWheelPivots)
             {
-                steeringWheelPivot.rotation = steeringWheelRotation;
+                steeringWheelPivot.localRotation = Quaternion.Euler(new Vector3(0, steeringAngle * Mathf.Rad2Deg, 0));
             }
-            Debug.Log("SteeringInput: " + steeringInput);
-            //steeringForwardDirection = quartenion * baseForwardDirection;
         }
-
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.blue;
-        //    Gizmos.DrawLine(transform.position, transform.position + steeringForwardDirection * 20);
-
-        //    Gizmos.color = Color.magenta;
-        //    Gizmos.DrawLine(transform.position, transform.position + drivingForce);
-        //}
     }
 }
