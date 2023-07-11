@@ -8,7 +8,7 @@ namespace ForkliftDemo.InputSystem
         private InputActions input;
 
         public float LiftingInputValue { get; private set; }
-        public Vector2 DrivingInputValue { get; private set; }
+        public Vector2 DrivingInputValue => input.Forklift.Drive.ReadValue<Vector2>();
 
         private void Awake()
         {
@@ -17,30 +17,19 @@ namespace ForkliftDemo.InputSystem
 
             input.Forklift.Lift.started += StartLifting;
             input.Forklift.Lift.canceled += StopLifting;
-
-            input.Forklift.Drive.started += StartDriving;
-            input.Forklift.Drive.canceled += StopDriving;
         }
 
         private void OnDestroy()
         {
             input.Forklift.Lift.started -= StartLifting;
             input.Forklift.Lift.canceled -= StopLifting;
-
-            input.Forklift.Drive.started -= StartDriving;
-            input.Forklift.Drive.canceled -= StopDriving;
         }
 
-        private void StartLifting(InputAction.CallbackContext callbackContext) 
+        private void StartLifting(InputAction.CallbackContext callbackContext)
             => LiftingInputValue = callbackContext.ReadValue<float>();
 
-        private void StopLifting(InputAction.CallbackContext callbackContext) 
+        private void StopLifting(InputAction.CallbackContext callbackContext)
             => LiftingInputValue = default;
 
-        private void StartDriving(InputAction.CallbackContext callbackContext) 
-            => DrivingInputValue = callbackContext.ReadValue<Vector2>();
-
-        private void StopDriving(InputAction.CallbackContext callbackContext) 
-            => DrivingInputValue = default;
     }
 }
