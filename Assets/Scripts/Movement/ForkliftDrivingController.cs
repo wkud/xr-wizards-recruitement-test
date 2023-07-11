@@ -7,17 +7,13 @@ using ForkliftDemo.ExtensionMethods;
 
 namespace ForkliftDemo.Movement
 {
-    public class ForkliftMovementController : MonoBehaviour
+    public class ForkliftDrivingController : MonoBehaviour
     {
         [FormerlySerializedAs("inputSystem")]
         [SerializeField]
         private PlayerInputSystem playerInputSystem;
         [SerializeField]
-        private Rigidbody liftRigidbody;
-        [SerializeField]
         private Rigidbody forkliftRigidbody;
-        [SerializeField]
-        private Transform forkliftForceAnchor;
         [SerializeField]
         [Range(0, MathExtension.HALF_PI)]
         private float maxSteeringAngle = MathExtension.HALF_PI;
