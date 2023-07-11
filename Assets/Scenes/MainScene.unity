@@ -290,14 +290,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.13052595, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: 14.04, z: -26.9}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -35, y: 5, z: 24.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +677,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1755705108
 GameObject:
@@ -713,7 +713,7 @@ Transform:
   - {fileID: 896215241}
   - {fileID: 1998085445}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1840526869 stripped
 MonoBehaviour:
@@ -824,37 +824,6 @@ Transform:
   m_Father: {fileID: 1755705109}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1978335559
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1978335560}
-  m_Layer: 0
-  m_Name: 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1978335560
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978335559}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.08, y: 0.3029158, z: 16.8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1998085441
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +931,7 @@ PrefabInstance:
     - target: {fileID: 2692044049348346499, guid: a5926ed5e6b3e1541a089fa7109de006,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2692044049348346499, guid: a5926ed5e6b3e1541a089fa7109de006,
         type: 3}
@@ -1217,7 +1186,7 @@ PrefabInstance:
         type: 3}
       propertyPath: debugTran
       value: 
-      objectReference: {fileID: 1978335560}
+      objectReference: {fileID: 0}
     - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
       propertyPath: maxAcceleration
@@ -1233,21 +1202,6 @@ PrefabInstance:
       propertyPath: playerInputSystem
       value: 
       objectReference: {fileID: 1840526869}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: accelerationController.maxAcceleration
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: accelerationController.maxDrivingSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8805163024465428429, guid: 07c736aeab7eae34f9eaa7e76376da33,
-        type: 3}
-      propertyPath: accelerationController.maxReversingSpeed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9170199329518214514, guid: 07c736aeab7eae34f9eaa7e76376da33,
         type: 3}
       propertyPath: m_StaticEditorFlags

@@ -27,7 +27,7 @@ namespace ForkliftDemo.Movement.VehicleAxisControllers
         private float NormalizeSpeed(float speedInDrivingDirection, bool isReversing)
         {
             var maxSpeed = isReversing ? maxReversingSpeed : maxDrivingSpeed;
-            return Mathf.Abs(Mathf.Clamp01(speedInDrivingDirection / maxSpeed));
+            return Mathf.Clamp01(Mathf.Abs(speedInDrivingDirection / maxSpeed));
         }
 
         private float GetAccelerationByDrivingSpeed(float normalizedDrivingSpeed)

@@ -34,9 +34,11 @@ namespace ForkliftDemo.Movement
         [SerializeField]
         private SuspensionAxisController suspensionController;
         [SerializeField]
-        private TractionController tractionController;
-        [SerializeField]
         private AccelerationAxisController accelerationController;
+        [SerializeField]
+        private TractionController sidewaysTractionController;
+        [SerializeField]
+        private TractionController driveAxisTractionController;
 
         private float steeringAngle;
 
@@ -62,7 +64,7 @@ namespace ForkliftDemo.Movement
 
                 var suspensionForce = suspensionController.CalculateSuspensionForce(hitInfo.distance, transform.up, wheelWorldVelocity);
                 resultantForce += suspensionForce;
-                var tractionInSteeringAxis = tractionController.CalculateTractionForce(wheelPivot.right, wheelWorldVelocity);
+                var tractionInSteeringAxis = sidewaysTractionController.CalculateTractionForce(wheelPivot.right, wheelWorldVelocity);
                 resultantForce += tractionInSteeringAxis;
 
                 if (driveWheelPivots.Contains(wheelPivot) && accelerationInput != 0)
@@ -72,7 +74,7 @@ namespace ForkliftDemo.Movement
 
                 if (accelerationInput == 0)
                 {
-                    var tractionForceInAccelerationAxis = tractionController.CalculateTractionForce(transform.forward, wheelWorldVelocity);
+                    var tractionForceInAccelerationAxis = driveAxisTractionController.CalculateTractionForce(transform.forward, wheelWorldVelocity);
                     resultantForce += tractionForceInAccelerationAxis;
                 }
 
