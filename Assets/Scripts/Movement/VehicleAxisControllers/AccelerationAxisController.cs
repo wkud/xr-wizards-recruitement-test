@@ -11,20 +11,23 @@ namespace ForkliftDemo.Movement.VehicleAxisControllers
         private float maxDrivingSpeed = 30;
         [SerializeField]
         private float maxAcceleration = 3;
+        [SerializeField]
+        private float maxReversingSpeed = 10;
 
         private const float LOW_SPEED_THRESHOLD = 0.5f;
 
         public Vector3 CalculateAccelerationForce(Vector3 vehicleLocalAxisZ, Vector3 vehicleRigidbodyVelicity, float accelerationInput)
         {
             var speedInDrivingDirection = Vector3.Dot(vehicleLocalAxisZ, vehicleRigidbodyVelicity);
-            float normalizedSpeed = NormalizeSpeed(speedInDrivingDirection);
+            float normalizedSpeed = NormalizeSpeed(speedInDrivingDirection, accelerationInput < 0);
             var availableTorque = GetAccelerationByDrivingSpeed(normalizedSpeed) * accelerationInput;
             return vehicleLocalAxisZ * availableTorque;
         }
 
-        private float NormalizeSpeed(float speedInDrivingDirection)
+        private float NormalizeSpeed(float speedInDrivingDirection, bool isReversing)
         {
-            return Mathf.Abs(Mathf.Clamp01(speedInDrivingDirection / maxDrivingSpeed));
+            var maxSpeed = isReversing ? maxReversingSpeed : maxDrivingSpeed;
+            return Mathf.Abs(Mathf.Clamp01(speedInDrivingDirection / maxSpeed));
         }
 
         private float GetAccelerationByDrivingSpeed(float normalizedDrivingSpeed)
